@@ -882,6 +882,7 @@ static void ui_draw_world(UIState *s) {
 }
 
 static void ui_draw_vision_maxspeed(UIState *s) {
+  /*
   const UIScene *scene = &s->scene;
   int ui_viz_rx = scene->ui_viz_rx;
   int ui_viz_rw = scene->ui_viz_rw;
@@ -920,9 +921,12 @@ static void ui_draw_vision_maxspeed(UIState *s) {
     nvgFontSize(s->vg, 42*2.5);
     nvgText(s->vg, viz_maxspeed_x+viz_maxspeed_w/2, 242, "N/A", NULL);
   }
+  */
 }
 
+
 static void ui_draw_vision_speed(UIState *s) {
+  /*
   const UIScene *scene = &s->scene;
   int ui_viz_rx = scene->ui_viz_rx;
   int ui_viz_rw = scene->ui_viz_rw;
@@ -955,6 +959,7 @@ static void ui_draw_vision_speed(UIState *s) {
   } else {
     nvgText(s->vg, viz_speed_x+viz_speed_w/2, 320, "mph", NULL);
   }
+  */
 }
 
 static void ui_draw_vision_wheel(UIState *s) {
