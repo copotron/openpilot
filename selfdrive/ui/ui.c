@@ -513,6 +513,7 @@ static void ui_update_frame(UIState *s) {
 }
 
 static void ui_draw_transformed_box(UIState *s, uint32_t color) {
+/*
   const UIScene *scene = &s->scene;
 
   const mat3 bbt = scene->warp_matrix;
@@ -547,6 +548,7 @@ static void ui_draw_transformed_box(UIState *s, uint32_t color) {
 
   assert(glGetError() == GL_NO_ERROR);
   glDrawArrays(GL_LINE_STRIP, 0, ARRAYSIZE(verts));
+  */
 }
 
 // Projects a point in car to space to the corresponding point in full frame
@@ -681,6 +683,7 @@ static void ui_draw_lane(UIState *s, const PathData path, NVGcolor color) {
 }
 
 static void ui_draw_track(UIState *s, bool is_mpc) {
+/*
   const UIScene *scene = &s->scene;
   const PathData path = scene->model.path;
   const float *mpc_x_coords = &scene->mpc_x[0];
@@ -767,6 +770,7 @@ static void ui_draw_track(UIState *s, bool is_mpc) {
   nvgFillPaint(s->vg, track_bg);
   nvgFill(s->vg);
   nvgRestore(s->vg);
+  */
 }
 
 static void draw_steering(UIState *s, float curvature) {
