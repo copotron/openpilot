@@ -627,7 +627,8 @@ static void draw_chevron(UIState *s, float x_in, float y_in, float sz,
 
 static void ui_draw_lane_line(UIState *s, const float *points, float off,
                       NVGcolor color, bool is_ghost) {
-  const UIScene *scene = &s->scene;
+/*
+const UIScene *scene = &s->scene;
 
   nvgSave(s->vg);
   nvgTranslate(s->vg, 240.0f, 0.0); // rgb-box space
@@ -672,6 +673,7 @@ static void ui_draw_lane_line(UIState *s, const float *points, float off,
   nvgFillColor(s->vg, color);
   nvgFill(s->vg);
   nvgRestore(s->vg);
+  */
 }
 
 static void ui_draw_lane(UIState *s, const PathData path, NVGcolor color) {
