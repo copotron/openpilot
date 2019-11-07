@@ -2,6 +2,11 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <chrono>
+
+#include <iostream>
+#include <chrono>
+using namespace std::chrono;
 
 #ifdef QCOM
 #include <eigen3/Eigen/Dense>
@@ -28,7 +33,7 @@
   #define TEMPORAL_SIZE 0
 #endif
 
-// #define DUMP_YUV
+#define DUMP_YUV
 
 Eigen::Matrix<float, MODEL_PATH_DISTANCE, POLYFIT_DEGREE> vander;
 
@@ -78,7 +83,9 @@ ModelData model_eval_frame(ModelState* s, cl_command_queue q,
   float *net_input_buf = model_input_prepare(&s->in, q, yuv_cl, width, height, transform);
 
   #ifdef DUMP_YUV
-    FILE *dump_yuv_file = fopen("/sdcard/dump.yuv", "wb");
+    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+    std::string dumpPath = "/data/media/yuv/" + std::to_string(ms.count()) + ".yuv";
+    FILE *dump_yuv_file = fopen(dumpPath.c_str(), "wb");
     fwrite(net_input_buf, MODEL_HEIGHT*MODEL_WIDTH*3/2, sizeof(float), dump_yuv_file);
     fclose(dump_yuv_file);
     assert(1==2);
