@@ -88,7 +88,7 @@ ModelData model_eval_frame(ModelState* s, cl_command_queue q,
     FILE *dump_yuv_file = fopen(dumpPath.c_str(), "wb");
     fwrite(net_input_buf, MODEL_HEIGHT*MODEL_WIDTH*3/2, sizeof(float), dump_yuv_file);
     fclose(dump_yuv_file);
-    assert(1==2);
+    //assert(1==2);
   #endif
 
   //printf("readinggggg \n");
