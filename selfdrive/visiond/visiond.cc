@@ -32,6 +32,9 @@
 #include <Eigen/Dense>
 #endif
 
+#include <chrono>
+using namespace std::chrono;
+
 #include "common/version.h"
 #include "common/util.h"
 #include "common/timing.h"
@@ -65,7 +68,7 @@
 
 #define UI_BUF_COUNT 4
 
-// #define DUMP_RGB
+#define DUMP_RGB
 
 //#define DEBUG_DRIVER_MONITOR
 
@@ -910,7 +913,7 @@ void* processing_thread(void *arg) {
 #ifdef DUMP_RGB
   s->rgb_width = s->frame_width;
   s->rgb_height = s->frame_height;
-  FILE *dump_rgb_file = fopen("/sdcard/dump.rgb", "wb");
+  //FILE *dump_rgb_file = fopen("/sdcard/dump.rgb", "wb");
 #endif
 
   // init the net
@@ -972,11 +975,19 @@ void* processing_thread(void *arg) {
     uint8_t *bgr_ptr = (uint8_t*)s->rgb_bufs[rgb_idx].addr;
 
 #ifdef DUMP_RGB
+    /*
     if (cnt % 20 == 0) {
       fwrite(bgr_ptr, s->rgb_buf_size, 1, dump_rgb_file);
       LOG("%d x %d", s->rgb_width, s->rgb_height);
       assert(1==2);
     }
+    */
+
+    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+    std::string dumpPath = "/data/media/rgb/" + std::to_string(ms.count()) + ".yuv";
+    FILE *dump_rgb_file = fopen(dumpPath.c_str(), "wb");
+    fwrite(dump_rgb_file, s->rgb_buf_size, 1 , dump_rgb_file);
+    fclose(dump_rgb_file);    
 #endif
 
     double yt1 = millis_since_boot();
@@ -1198,7 +1209,7 @@ void* processing_thread(void *arg) {
   }
 
 #ifdef DUMP_RGB
-  fclose(dump_rgb_file);
+  //fclose(dump_rgb_file);
 #endif
 
   zsock_destroy(&model_sock);
