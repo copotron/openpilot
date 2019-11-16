@@ -986,7 +986,7 @@ void* processing_thread(void *arg) {
       milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
       std::string dumpPath = "/data/media/rgb/" + std::to_string(ms.count()) + ".rgb";
       FILE *dump_rgb_file = fopen(dumpPath.c_str(), "wb");
-      fwrite(dump_rgb_file, s->rgb_buf_size, 1 , dump_rgb_file);
+      fwrite(bgr_ptr, s->rgb_buf_size, 1 , dump_rgb_file);
       fclose(dump_rgb_file);
     }
 #endif
