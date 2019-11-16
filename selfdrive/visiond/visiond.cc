@@ -981,13 +981,14 @@ void* processing_thread(void *arg) {
       LOG("%d x %d", s->rgb_width, s->rgb_height);
       assert(1==2);
     }
-    */
-
-    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-    std::string dumpPath = "/data/media/rgb/" + std::to_string(ms.count()) + ".yuv";
-    FILE *dump_rgb_file = fopen(dumpPath.c_str(), "wb");
-    fwrite(dump_rgb_file, s->rgb_buf_size, 1 , dump_rgb_file);
-    fclose(dump_rgb_file);    
+    */   
+    if (cnt % 20 == 0) {
+      milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+      std::string dumpPath = "/data/media/rgb/" + std::to_string(ms.count()) + ".rgb";
+      FILE *dump_rgb_file = fopen(dumpPath.c_str(), "wb");
+      fwrite(dump_rgb_file, s->rgb_buf_size, 1 , dump_rgb_file);
+      fclose(dump_rgb_file);
+    }
 #endif
 
     double yt1 = millis_since_boot();
